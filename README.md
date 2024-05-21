@@ -2,8 +2,8 @@
 This Project is the start of my first executable made using P5.js, Matter.js, Electron Software Framework.
 
 # Preperation Guide
-* Download counter Setup 1.0.0 <p>
-* Run counter Setup 1.0.0
+* Download counter Setup 1.0.1 <p>
+* Run counter Setup 1.0.1
 
 # Counter Executed
 <p align="center">
