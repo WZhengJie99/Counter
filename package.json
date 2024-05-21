@@ -1,7 +1,7 @@
 {
   "name": "counter",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.1",
+  "description": "This Project is the start of my first executable made using P5.js, Matter.js, Electron Software Framework.",
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -15,7 +15,6 @@
     "electron": "^30.0.6",
     "electron-builder": "^24.13.3"
   },
-  
   "build": {
     "appId": "com.example.myapp",
     "win": {

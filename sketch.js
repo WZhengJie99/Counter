@@ -10,7 +10,7 @@ let world;
 let balls = [];
 let ballSize = 20;
 let ballColor = [255, 0, 0];
-let ballAddRate = 100; // 1 ball per second
+let ballAddRate = 1000; // 1000 = 1 ball per second
 let ballCount = 0;
 let maxBalls;
 let boundaries = [];
