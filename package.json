@@ -18,7 +18,8 @@
   "build": {
     "appId": "com.example.myapp",
     "win": {
-      "target": "nsis"
+      "target": "nsis",
+      "icon": "build/icons/countericon.ico"
     },
     "files": [
       "**/*"
