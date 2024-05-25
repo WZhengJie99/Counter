@@ -1,6 +1,6 @@
 {
   "name": "counter",
-  "version": "1.0.1",
+  "version": "0.0.2",
   "description": "This Project is the start of my first executable made using P5.js, Matter.js, Electron Software Framework.",
   "main": "main.js",
   "scripts": {
@@ -9,7 +9,8 @@
     "dist": "electron-builder"
   },
   "keywords": [],
-  "author": "",
+  "author": "Wong Zheng Jie",
+  "email": "wzhengjie99@gmail.com",
   "license": "ISC",
   "devDependencies": {
     "electron": "^30.0.6",
