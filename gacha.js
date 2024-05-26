@@ -13,7 +13,15 @@ let gachaInterval;
 let obtainedItems = [];
 
 async function loadObtainedItems() {
-    obtainedItems = await window.api.loadObtainedItems();
+    const data = await window.api.loadObtainedItems();
+    if (data) {
+        obtainedItems = data.obtainedItems || [];
+        selectedItemIndex = data.selectedItemIndex || 0;
+    } else {
+        obtainedItems = [];
+        selectedItemIndex = 0;
+    }
+
     if (obtainedItems.length === 0) {
         // Initialize with the default red ball if no items are loaded
         obtainedItems.push({
@@ -21,31 +29,26 @@ async function loadObtainedItems() {
             color: [255, 0, 0],
             size: 20,
             probability: 0.0,
-            effect: () => {
-                ballColor = [255, 0, 0];
-                ballSize = 20;
-                ballAddRate = 1000;
-                clearInterval(gachaInterval);
-                gachaInterval = setInterval(addBall, ballAddRate);
-            }
+            ballAddRate: 1000 // Default ballAddRate for the red ball
         });
     }
-    applyItemEffect(obtainedItems[0]); // Apply the effect of the first item
+
+    applyItemEffect(obtainedItems[selectedItemIndex]); // Apply the effect of the selected item
     currentSkins(); // Render the current skins
 }
 
 function saveObtainedItems() {
     console.log("saved");
-    window.api.saveObtainedItems(obtainedItems);
+    window.api.saveObtainedItems({ obtainedItems, selectedItemIndex });
 }
 
 
 function applyItemEffect(item) {
-    if (typeof item.effect === 'function') {
-        item.effect();
-    } else {
-        console.error('Invalid effect function for item:', item);
-    }
+    ballColor = item.color;
+    ballSize = item.size;
+    ballAddRate = item.ballAddRate || 1000;
+    clearInterval(gachaInterval);
+    gachaInterval = setInterval(addBall, ballAddRate);
 }
 
 loadObtainedItems();
@@ -151,7 +154,6 @@ async function rollGacha() {
 
                 obtainedItems.push(newItem); // Add the obtained item to the list if it's not already there
                 saveObtainedItems(); // Save the obtained items
-                applyItemEffect(obtainedItems.length - 1); // Apply the effect of the new item by passing its index
             }
             break;
         }
