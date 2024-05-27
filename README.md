@@ -1,14 +1,22 @@
 # Counter
 This Project is the start of my first executable made using P5.js, Matter.js, Electron Software Framework.
 
-# Preperation Guide
-* Download counter Setup 0.0.2 <p>
-* Run counter Setup 0.0.2
+## Downloading the Executable
+
+You can download the executable file from Google Drive using the following link:
+
+[Download the executable](https://drive.google.com/file/d/1xFgNUuUimjjjsid_YyOIErtkxgiKS__p/view?usp=sharing)
+
+Alternatively, you can use the following command in your terminal to download the file:
+
+curl -L -o "counter Setup 0.0.2.exe" "https://drive.google.com/uc?export=download&id=1xFgNUuUimjjjsid_YyOIErtkxgiKS__p"
 
 # Counter Executed
 <p align="center">
 <img width="70%" height="70%" src="https://github.com/WZhengJie99/Counter/assets/147889572/4808a2ae-f96e-4412-99fc-af8ff588388e">
 </p>
+
+
 
 <!-- 
 # Editing Notes
