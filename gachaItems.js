@@ -22,13 +22,6 @@ let gachaItems = [
         ballAddRate: 1000
     },
     {
-        name: 'Fast Red Ball',
-        color: [255, 0, 0],
-        size: 20,
-        probability: 0.1,
-        ballAddRate: 100
-    },
-    {
         name: 'Orange Ball',
         color: [255, 128, 0],
         size: 20,
@@ -41,5 +34,19 @@ let gachaItems = [
         size: 20,
         probability: 0.225,
         ballAddRate: 1000
+    },
+    {
+        name: 'Black Ball',
+        color: [0, 0, 0],
+        size: 20,
+        probability: 0.225,
+        ballAddRate: 1000
+    },
+    {
+        name: 'Fast Red Ball',
+        color: [255, 0, 0],
+        size: 20,
+        probability: 0.1,
+        ballAddRate: 500
     }
 ];

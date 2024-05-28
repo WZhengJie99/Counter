@@ -85,17 +85,28 @@ function draw() {
     }
   }
 
-  fill(0);
+  
   textSize(32);
+  fill(0);
   noStroke();
   if (shopOpened) {
-    text('Exit Shop', 10, 40);
+    text('Exit Shop', 27, 40);
+    noFill();
+    stroke(5);
+    rect(22, 8, textWidth('Exit Shop') + 10,42)
+    fill(0);
+    noStroke();
   }
   else {
-    text('Shop', 10, 40);
-    text('Highscore: ' + highscore, 10, 120);
+    text('Shop', 27, 40);
+    noFill();
+    stroke(5);
+    rect(22, 8, textWidth('Shop') + 10,42)
+    fill(0);
+    noStroke();
+    text('Highscore: ' + highscore, 20, 120);
   }
-  text('Ball Count: ' + ballCount, 10, 80);
+  text('Ball Count: ' + ballCount, 20, 80);
 
 
   if (ballCount > highscore) {
@@ -143,54 +154,49 @@ function windowResized() {
 }
 
 function mouseClicked() {
-  if (!shopOpened && mouseX > 10 && mouseX < 10 + 50 + textWidth('Shop') && mouseY > 20 && mouseY < 60) {
-    openShop();
-  } else if (shopOpened && mouseX > 10 && mouseX < 10 + 50 + textWidth('Exit Shop') && mouseY > 20 && mouseY < 60) {
-    closeShop();
+  if (!shopOpened && mouseX > 10 && mouseX < 10 + 50 + textWidth('Shop') && mouseY > 10 && mouseY < 50) {
+      openShop();
+  } else if (shopOpened && mouseX > 10 && mouseX < 10 + 50 + textWidth('Exit Shop') && mouseY > 10 && mouseY < 50) {
+      closeShop();
   } else if (shopOpened && mouseX > (width / 5) - 50 && mouseX < (width / 5) + 50 + textWidth('Open Gacha') && mouseY > 100 && mouseY < 150) {
-    openGacha();
+      openGacha();
   } else if (shopOpened && mouseX > ((width / 5) * 3) - 50 && mouseX < ((width / 5) * 3) + 50 + textWidth('Current Skins') && mouseY > 100 && mouseY < 150) {
-    currentSkins();
-  } else if (shopOpened && gachaShop && mouseX > 20 && mouseX < 20 + 200 && mouseY > 55 + (height / 10) * 2 && mouseY < 55 + (height / 10) * 2 + (height / 10) * 6 + 40) {
-    rollGacha();
+      currentSkins();
+  } else if (shopOpened && gachaShop && mouseX > 20 && mouseX < 20 + 200 && mouseY > 55 + (height / 10) * 2 && mouseY < 55 + (height / 10) * 6 + 40) {
+      rollGacha();
+  } else if (shopOpened && gachaShop && mouseX > 240 && mouseX < 240 + 200 && mouseY > 55 + (height / 10) * 2 && mouseY < 55 + (height / 10) * 6 + 40) {
+      rollGachaMultiple();
   } else if (shopOpened && !gachaShop) {
-    // Check if the mouse is clicked on an obtained item
-    let horizontalSpacing = 160; // Space between items horizontally
-    let verticalSpacing = 110; // Space between items vertically
-    let itemsPerRow = floor(width / horizontalSpacing); // Calculate how many items can fit per row
+      let horizontalSpacing = 160; // Space between items horizontally
+      let verticalSpacing = 110; // Space between items vertically
+      let itemsPerRow = floor(width / horizontalSpacing); // Calculate how many items can fit per row
 
-    for (let i = 0; i < obtainedItems.length; i++) {
-      let item = obtainedItems[i];
+      for (let i = 0; i < obtainedItems.length; i++) {
+          let item = obtainedItems[i];
 
-      // Calculate row and column for current item
-      let col = i % itemsPerRow;
-      let row = floor(i / itemsPerRow);
+          let col = i % itemsPerRow;
+          let row = floor(i / itemsPerRow);
 
-      // Calculate position considering row, column, and scroll
-      let posX = 80 + col * horizontalSpacing;
-      let posY = 200 + row * verticalSpacing - scrollY;
+          let posX = 80 + col * horizontalSpacing;
+          let posY = 200 + row * verticalSpacing - scrollY;
 
-      // Check if the mouse is within the bounds of the item's rectangle
-      if (mouseX > posX - item.size * 3.72 && mouseX < posX + item.size * 3.72 &&
-        mouseY > posY - item.size * 2 && mouseY < posY + item.size * 3) {
-        // Switch to the selected item
-        ballColor = obtainedItems[i].color;
-        ballSize = obtainedItems[i].size;
+          if (mouseX > posX - item.size * 3.72 && mouseX < posX + item.size * 3.72 &&
+              mouseY > posY - item.size * 2 && mouseY < posY + item.size * 3) {
+              ballColor = obtainedItems[i].color;
+              ballSize = obtainedItems[i].size;
 
-        // Update ballAddRate and gachaInterval based on obtained item
-        ballAddRate = obtainedItems[i].ballAddRate || 1000; // Default value is 1000 if not specified
-        clearInterval(gachaInterval);
-        gachaInterval = setInterval(addBall, ballAddRate);
+              ballAddRate = obtainedItems[i].ballAddRate || 1000;
+              clearInterval(gachaInterval);
+              gachaInterval = setInterval(addBall, ballAddRate);
 
-        selectedItemIndex = i; // Update the selected item index
-        saveObtainedItems(); // Save the obtained items
+              selectedItemIndex = i; // Update the selected item index
+              saveObtainedItems(); // Save the obtained items
 
-        break;
+              break;
+          }
       }
-    }
   }
 }
-
 
 let scrollY = 0; // Initial scroll position
 let mouseWheelDelta = 0;
