@@ -65,7 +65,7 @@ function draw() {
 
   if (shopOpened) {
     // Draw the grey rectangle to cover the canvas
-    fill(225, 225, 225, 240); // Grey color with some transparency
+    fill(225, 225, 225, 240);
     noStroke();
     rect(0, 0, width, height);
 
@@ -83,25 +83,43 @@ function draw() {
     } else {
       currentSkins();
     }
+    achievementsPanelOpened = false;
+  } else if (!shopOpened && achievementsPanelOpened) {
+    displayAchievements();
+    shopOpened = false;
+    gachaShop = false;
+    // Draw the achievements panel content here...
+  } else if (!shopOpened && !achievementsPanelOpened) {
+    shopOpened = false;
+    gachaShop = false;
   }
 
   
   textSize(32);
   fill(0);
   noStroke();
-  if (shopOpened) {
+  if (shopOpened && !achievementsPanelOpened) {
     text('Exit Shop', 27, 40);
     noFill();
     stroke(5);
     rect(22, 8, textWidth('Exit Shop') + 10,42)
     fill(0);
     noStroke();
+  } else if (achievementsPanelOpened && !shopOpened) {
+    text('Exit Achievements', 27, 40);
+    noFill();
+    stroke(5);
+    rect(22, 8, textWidth('Exit Achievements') + 10,42)
+    fill(0);
+    noStroke();
   }
-  else {
+  else if (!shopOpened && !achievementsPanelOpened) {
     text('Shop', 27, 40);
+    text('Achievements', 27 + textWidth("Shop") + 25, 40);
     noFill();
     stroke(5);
     rect(22, 8, textWidth('Shop') + 10,42)
+    rect(22 + textWidth("Shop") + 25, 8, textWidth('Achievements') + 10,42)
     fill(0);
     noStroke();
     text('Highscore: ' + highscore, 20, 120);
@@ -154,9 +172,9 @@ function windowResized() {
 }
 
 function mouseClicked() {
-  if (!shopOpened && mouseX > 10 && mouseX < 10 + 50 + textWidth('Shop') && mouseY > 10 && mouseY < 50) {
+  if (!shopOpened && mouseX > 15 && mouseX < 10 + 25 + textWidth('Shop') && mouseY > 10 && mouseY < 50) {
       openShop();
-  } else if (shopOpened && mouseX > 10 && mouseX < 10 + 50 + textWidth('Exit Shop') && mouseY > 10 && mouseY < 50) {
+  } else if (shopOpened && mouseX > 15 && mouseX < 10 + 50 + textWidth('Exit Shop') && mouseY > 10 && mouseY < 50) {
       closeShop();
   } else if (shopOpened && mouseX > (width / 5) - 50 && mouseX < (width / 5) + 50 + textWidth('Open Gacha') && mouseY > 100 && mouseY < 150) {
       openGacha();
@@ -195,6 +213,14 @@ function mouseClicked() {
               break;
           }
       }
+  } else if (!achievementsPanelOpened && mouseX > 27 + textWidth("Shop") + 25 && mouseX < 27 + textWidth("Shop") + 25 + textWidth("Achievements") && mouseY > 10 && mouseY < 50) {
+    achievementsPanelOpened = true; // Open the achievements panel
+    shopOpened = false;
+    gachaShop = false;
+  } else if (achievementsPanelOpened && mouseX > 0 && mouseX < 27 + textWidth("Exit Achievements") && mouseY > 10 && mouseY < 50) {
+    achievementsPanelOpened = false; // Close the achievements panel
+    shopOpened = false;
+    gachaShop = false;
   }
 }
 

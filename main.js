@@ -11,6 +11,7 @@ const path = require('path');
 const fs = require('fs');
 
 const obtainedItemsFilePath = path.join(app.getPath('userData'), 'obtainedItems.json');
+const achievementsFilePath = path.join(app.getPath('userData'), 'achievements.json');
 
 let highscoreFile = path.join(app.getPath('userData'), 'highscore.json');
 let highscore = 0;
@@ -86,4 +87,30 @@ ipcMain.handle('loadObtainedItems', async () => {
         console.error("Error loading obtained items:", error);
         return [];
     }
+});
+
+
+// Handle saving and loading of achievements data
+ipcMain.handle('saveAchievementsData', async (event, achievements) => {
+  try {
+      fs.writeFileSync(achievementsFilePath, JSON.stringify(achievements, null, 2));
+      return true;
+  } catch (error) {
+      console.error("Error saving achievements data:", error);
+      return false;
+  }
+});
+
+ipcMain.handle('loadAchievementsData', async () => {
+  try {
+      if (fs.existsSync(achievementsFilePath)) {
+          const data = fs.readFileSync(achievementsFilePath, 'utf8');
+          return JSON.parse(data);
+      } else {
+          return [];
+      }
+  } catch (error) {
+      console.error("Error loading achievements data:", error);
+      return [];
+  }
 });

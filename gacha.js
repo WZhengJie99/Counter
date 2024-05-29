@@ -79,6 +79,7 @@ function openShop() {
 
 function closeShop() {
     shopOpened = false;
+    gachaShop = false;
 }
 
 //Gacha shop tabs
