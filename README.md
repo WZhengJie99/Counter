@@ -13,7 +13,7 @@ curl -L -o "counter Setup 0.0.2.exe" "https://drive.google.com/uc?export=downloa
 
 # Counter Executed
 <p align="center">
-<img width="70%" height="70%" src="https://github.com/WZhengJie99/Counter/assets/147889572/4808a2ae-f96e-4412-99fc-af8ff588388e">
+<img width="70%" height="70%" src="https://github.com/WZhengJie99/Counter/assets/147889572/8a1203f6-6e02-416e-8f15-b2fefc4fedba">
 </p>
 
 
